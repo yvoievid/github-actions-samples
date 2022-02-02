@@ -111,12 +111,12 @@ jobs:
          then
             kubectl create ns python-app-blue
             cd k8s
-            kustomize edit set ns python-app-blue
+            kustomize edit set namespace python-app-blue
          elif [ $namespacePresentGreen -eq 0 ]
          then
             kubectl create ns python-app-green
             cd k8s
-            kustomize edit set ns python-app-green
+            kustomize edit set namespace python-app-green
          else
             echo "Both Blue and Green namespaces are present! Exiting"
             exit 1
