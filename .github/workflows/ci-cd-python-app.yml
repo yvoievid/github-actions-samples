@@ -112,11 +112,19 @@ jobs:
             kubectl create ns python-app-blue
             cd k8s
             kustomize edit set namespace python-app-blue
+            export NEW_NAMESPACE=python-app-blue
+            export OLD_NAMESPACE=python-app-green
+            echo "::set-env name=NEW_NAMESPACE::$NEW_NAMESPACE"
+            echo "::set-env name=OLD_NAMESPACE::$OLD_NAMESPACE"
          elif [ $namespacePresentGreen -eq 0 ]
          then
             kubectl create ns python-app-green
             cd k8s
             kustomize edit set namespace python-app-green
+            export NEW_NAMESPACE=python-app-green
+            export OLD_NAMESPACE=python-app-blue
+            echo "::set-env name=NEW_NAMESPACE::$NEW_NAMESPACE"
+            echo "::set-env name=OLD_NAMESPACE::$OLD_NAMESPACE"
          else
             echo "Both Blue and Green namespaces are present! Exiting"
             exit 1
@@ -140,9 +148,13 @@ jobs:
     #    kubectl apply -k k8s/
 
     # REMOVE OLD DEPLOYMENT!!
-    # - name: Deploy updated Kubernetes resources
-    #  run: |
-    #    kubectl apply -k k8s/
+    - name: Remove old namespace
+      run: |
+        namespacePresentOld=`kubectl get ns | grep $OLD_NAMESPACE | wc -l`
+        if [ $namespacePresentOld -eq 1 ]
+        then
+          kubectl delete ns $OLD_NAMESPACE --wait=true
+        fi
  
     - name: Commit files
       run: |
