@@ -112,19 +112,15 @@ jobs:
             kubectl create ns python-app-blue
             cd k8s
             kustomize edit set namespace python-app-blue
-            export NEW_NAMESPACE=python-app-blue
-            export OLD_NAMESPACE=python-app-green
-            echo "::set-env name=NEW_NAMESPACE::$NEW_NAMESPACE"
-            echo "::set-env name=OLD_NAMESPACE::$OLD_NAMESPACE"
+            echo "NEW_NAMESPACE=python-app-blue" >> $GITHUB_ENV
+            echo "OLD_NAMESPACE=python-app-green" >> $GITHUB_ENV
          elif [ $namespacePresentGreen -eq 0 ]
          then
             kubectl create ns python-app-green
             cd k8s
             kustomize edit set namespace python-app-green
-            export NEW_NAMESPACE=python-app-green
-            export OLD_NAMESPACE=python-app-blue
-            echo "::set-env name=NEW_NAMESPACE::$NEW_NAMESPACE"
-            echo "::set-env name=OLD_NAMESPACE::$OLD_NAMESPACE"
+            echo "NEW_NAMESPACE=python-app-green" >> $GITHUB_ENV
+            echo "OLD_NAMESPACE=python-app-blue" >> $GITHUB_ENV
          else
             echo "Both Blue and Green namespaces are present! Exiting"
             exit 1
@@ -150,10 +146,10 @@ jobs:
     # REMOVE OLD DEPLOYMENT!!
     - name: Remove old namespace
       run: |
-        namespacePresentOld=`kubectl get ns | grep $OLD_NAMESPACE | wc -l`
+        namespacePresentOld=`kubectl get ns | grep ${{ env.OLD_NAMESPACE }} | wc -l`
         if [ $namespacePresentOld -eq 1 ]
         then
-          kubectl delete ns $OLD_NAMESPACE --wait=true
+          kubectl delete ns ${{ env.OLD_NAMESPACE }} --wait=true
         fi
  
     - name: Commit files
@@ -161,6 +157,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -am "Bump docker tag"
+        
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
