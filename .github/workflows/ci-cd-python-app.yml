@@ -71,8 +71,7 @@ jobs:
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
 
-  deploy:
-    
+  deploy: 
     name: Deploy
     runs-on: ubuntu-latest
     needs: build
@@ -86,18 +85,11 @@ jobs:
       with:
         kustomize-version: "3.6.1"
 
-#    - name: Authenticate to Google Cloud
-#      uses: google-github-actions/auth@v0
-#      with:
-#        token_format: 'access_token'
-#        workload_identity_provider: ${{ secrets.WORKLOAD_ID_PROVIDER}}
-#        service_account: ${{secrets.SERVICE_ACCOUNT_NAME}}
-
     # Alternative option - authentication via credentials json
-     - name: Authenticate to Google Cloud
-       uses: 'google-github-actions/auth@v0'
-       with:
-         credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+    - name: Authenticate to Google Cloud
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v0
