@@ -8,4 +8,4 @@ namespace: python-app-blue
 images:
 - name: hello-gitops
   newName: elisska/hello-gitops
-  newTag: fd88ee5cc94dacd8c46dee669bafc8e3519b787c
+  newTag: e41f184f178e09d61f5ffa29188ee73d356b45dd
