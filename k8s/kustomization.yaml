@@ -8,4 +8,4 @@ namespace: python-app-green
 images:
 - name: hello-gitops
   newName: elisska/hello-gitops
-  newTag: 6fa8c791986eb65199cb8c5063ae407507cd914f
+  newTag: 4a5995cc51bd928f3687211163361a05ee1fee6b
