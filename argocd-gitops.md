@@ -149,7 +149,7 @@ Application is reachable on port 8050 inside the cluster. It displays a simple H
 
 You can reach it through a port forward command 
 ```
-kubectl -n hello-gitops port-forward $(kubectl -n hello-gitops get po -o name) 8111:8050
+kubectl -n hello-gitops port-forward $(kubectl -n hello-gitops get po -o name | tail -n 1) 8111:8050
 curl localhost:8111
 Hello, World!
 ```
