@@ -16,7 +16,7 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/os: linux
-        kubernetes.io/arch: amd64
+        kubernetes.io/arch: x86_64
       containers:
         - image: gitops-example
           name: gitops-example
