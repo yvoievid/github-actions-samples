@@ -14,9 +14,11 @@ spec:
       labels:
         app: gitops-example
     spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+        kubernetes.io/arch: amd64
       containers:
         - image: gitops-example
-          platform: linux/x86_64
           name: gitops-example
           ports:
             - name: http
