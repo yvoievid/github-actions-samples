@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
         - image: gitops-example
+          platform: linux/x86_64
           name: gitops-example
           ports:
             - name: http
