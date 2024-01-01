@@ -106,3 +106,4 @@ jobs:
       with:
         force_with_lease: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        repository: yvoievid/github-actions-samples
