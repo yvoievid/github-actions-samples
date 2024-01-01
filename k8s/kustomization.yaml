@@ -4,8 +4,8 @@ resources:
 - deployment.yaml
 - service.yaml
 - ingress.yaml
-namespace: hello-gitops
+namespace: argocd
 images:
-- name: hello-gitops
-  newName: elisska/hello-gitops
+- name: gitops-example
+  newName: yvoievid/gitops-example
   newTag: f614dea9d2be54fd45418872aab39fb55a1e0c1b

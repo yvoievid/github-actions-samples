@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: hello-gitops
-  name: hello-gitops
+    app: gitops-example
+  name: gitops-example
 spec:
   ports:
     - name: http
       port: 8050
       targetPort: http
   selector:
-    app: hello-gitops
+    app: gitops-example
   type: ClusterIP
