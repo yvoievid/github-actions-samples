@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: hello-gitops
-  name: hello-gitops
+    app: gitops-example
+  name: gitops-example
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: hello-gitops
+      app: gitops-example
   template:
     metadata:
       labels:
-        app: hello-gitops
+        app: gitops-example
     spec:
       containers:
-        - image: hello-gitops
-          name: hello-gitops
+        - image: gitops-example
+          name: gitops-example
           ports:
             - name: http
               containerPort: 8050

@@ -1,6 +1,6 @@
 # Hello GitOps
 
-**Based on [original project](https://github.com/esys/workshop-hello-gitops)**
+**Based on [original project](https://github.com/esys/workshop-gitops-example)**
 
 Example project to demonstrate GitOps using [Kustomize](https://github.com/kubernetes-sigs/kustomize), GitHub Actions and [ArgoCD](https://github.com/argoproj/argo-cd/)
 
@@ -35,7 +35,7 @@ minikube start
 
 - Create the K8s namespaces we will use
 ```
-kubectl create ns hello-gitops
+kubectl create ns gitops-example
 kubectl create ns argocd
 ```
 
@@ -115,9 +115,9 @@ Kustomize manifests are in the `kustomize` folder.
 The `kustomization.yaml` is updated automatically by the GitHub workflow to add a new `images` transformation setting the right image name and tag.
 ```
 images:
-- name: hello-gitops
+- name: gitops-example
   newTag: baadd7d7832f74e3c6d37b3f07b179d7e86c4017
-  newName: elisska/hello-gitops
+  newName: elisska/gitops-example
 ```
 
 No need to touch these settings as they are updated by the workflow.
@@ -131,7 +131,7 @@ At the end of the workflow, Kustomize manifests are referencing the newly built 
   - your forked GitHub repository address
   - `HEAD` or `master` revision
   - `k8s` as the `Path` parameter
-  - `hello-gitops` as namespace
+  - `gitops-example` as namespace
 - Application configuration should look like this
 
 ![](doc/argocd_project.png)
@@ -149,7 +149,7 @@ Application is reachable on port 8050 inside the cluster. It displays a simple H
 
 You can reach it through a port forward command 
 ```
-kubectl -n hello-gitops port-forward $(kubectl -n hello-gitops get po -o name | tail -n 1) 8111:8050
+kubectl -n gitops-example port-forward $(kubectl -n gitops-example get po -o name | tail -n 1) 8111:8050
 curl localhost:8111
 Hello, World!
 ```
