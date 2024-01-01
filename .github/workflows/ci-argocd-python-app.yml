@@ -104,5 +104,5 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        fetch-depth: 0
+        force_with_lease: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
