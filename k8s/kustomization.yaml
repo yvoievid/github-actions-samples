@@ -8,4 +8,4 @@ namespace: gitops-example
 images:
 - name: gitops-example
   newName: yurchezz/gitops-example
-  newTag: 4f0416fdfeb25dce354e2c1cb6af738e35bf21da
+  newTag: 7550d07df914f0e5a06b9e80c0a5f94c16db5cef
