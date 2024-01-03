@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ./green.yaml
+- ./service.yaml
+- ./ingress.yaml
+namespace: default
+images:
+- name: gcr.io/$PROJECT_ID/$IMAGE
+  newName: yvoievid/gcr.io/$PROJECT_ID/$IMAGE
+  newTag: f614dea9d2be54fd45418872aab39fb55a1e0c1b

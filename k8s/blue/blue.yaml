@@ -5,18 +5,23 @@ metadata:
     app: gitops-example
   name: gitops-example
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
       app: gitops-example
+      version: v1.0.0
   template:
     metadata:
       labels:
         app: gitops-example
+        version: v1.0.0
     spec:
       containers:
-        - image: gitops-example
+        - image: gcr.io/PROJECT_ID/IMAGE:TAG
           name: gitops-example
           ports:
             - name: http
               containerPort: 8050
+          env:
+          - name: VERSION
+            value: v1.0.0
