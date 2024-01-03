@@ -18,7 +18,6 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GAR_LOCATION: ${{ secrets.GAR_LOCATION }}
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}    
   GKE_ZONE:  ${{ secrets.GKE_ZONE }}   
   DEPLOYMENT_NAME: gitops-example-green
@@ -61,12 +60,10 @@ jobs:
       run: |
         pytest
 
-
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
       with:
         credentials_json: '${{ secrets.GKE_SA_KEY }}'
-
 
     - run: |-
         gcloud --quiet auth configure-docker
@@ -89,12 +86,10 @@ jobs:
       run: |-
           docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
-
     - name: Set up Kustomize
       run: |-
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
-
 
     - name: Deploy
       run: |-
@@ -107,7 +102,7 @@ jobs:
     - name: Redirect Traffic
       run: |-
         kubectl patch service $SERVICE_NAME -p '{"spec":{"selector":{"version":"v2.0.0"}}}'
-  
+
     - name: Exterminate Blue Deployment
       run: |-
         kubectl delete deploy $DEPLOYMENT_NAME

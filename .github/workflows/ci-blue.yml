@@ -18,7 +18,6 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GAR_LOCATION: ${{ secrets.GAR_LOCATION }}
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}    
   GKE_ZONE:  ${{ secrets.GKE_ZONE }}   
   DEPLOYMENT_NAME: gitops-example-blue
