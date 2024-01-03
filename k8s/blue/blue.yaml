@@ -3,20 +3,25 @@ kind: Deployment
 metadata:
   labels:
     app: gitops-example
-  name: gitops-example-green
+  name: gitops-example
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: gitops-example
+      version: v1.0.0
   template:
     metadata:
       labels:
         app: gitops-example
+        version: v1.0.0
     spec:
       containers:
-        - image: gcr.io/PROJECT_ID/IMAGE-green:TAG
+        - image: gcr.io/PROJECT_ID/IMAGE:TAG
           name: gitops-example
           ports:
             - name: http
               containerPort: 8050
+          env:
+          - name: VERSION
+            value: v1.0.0

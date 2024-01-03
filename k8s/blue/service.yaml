@@ -11,4 +11,5 @@ spec:
       targetPort: http
   selector:
     app: gitops-example
+    version: v1.0.0
   type: LoadBalancer
