@@ -15,7 +15,7 @@ spec:
         app: gitops-example
     spec:
       containers:
-        - image: gitops-example
+        - image: gcr.io/PROJECT_ID/IMAGE:TAG
           name: gitops-example
           ports:
             - name: http

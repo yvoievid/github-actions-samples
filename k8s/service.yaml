@@ -11,4 +11,4 @@ spec:
       targetPort: http
   selector:
     app: gitops-example
-  type: ClusterIP
+  type: LoadBalancer
