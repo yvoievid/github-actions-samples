@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ./k8s/deployment.yaml
+- ./k8s/service.yaml
+- ./k8s/ingress.yaml
+namespace: default
+# images:
+# - name: gitops-example
+#   newName: yvoievid/gitops-example
+#   newTag: f614dea9d2be54fd45418872aab39fb55a1e0c1b
