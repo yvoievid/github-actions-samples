@@ -111,7 +111,7 @@ jobs:
 
     # Push the Docker image to Google Artifact Registry
     - name: Publish
-        run: |-
+      run: |-
           docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
     # Set up kustomize
